@@ -41,8 +41,146 @@ header{position:fixed;z-index:100;inset:0 0 auto;transition:.3s}header.scrolled{
 .compare-handle:after{content:"↔";font-family:var(--thin);font-size:15px}.compare-label{position:absolute;z-index:5;bottom:15px;padding:6px 9px;background:rgba(8,10,11,.75);font-family:var(--thin);font-weight:200;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#eee}
 
 .compare-label.before{left:15px}.compare-label.after-label{right:15px}.compare input{position:absolute;z-index:10;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize}.breakdown-panel{padding:40px 0 40px 22px;border-left:1px solid var(--line)}.breakdown-list{display:flex;flex-direction:column;gap:12px;margin-top:24px}.breakdown-item{width:100%;display:grid;grid-template-columns:64px 1fr;gap:11px;align-items:center;padding:0;border:0;background:none;color:var(--ink);text-align:left;opacity:.62;transition:.2s}.breakdown-item:hover{opacity:1;transform:translateX(3px)}.breakdown-item img{width:64px;height:40px;object-fit:cover}.breakdown-item small{display:block;font-family:var(--thin);font-size:9px;color:#999b98;letter-spacing:.14em}.breakdown-item span{font-family:var(--thin);font-weight:200;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#c5c4bf}
+
 /* FILMSTRIP */
-.filmstrip-section{padding:32px 0 115px}.filmstrip-title{margin-bottom:18px}.filmstrip{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px}.project-thumb{padding:0;border:0;background:none;color:inherit;text-align:left;min-width:0}.thumb-media{aspect-ratio:16/9;overflow:hidden;border:1px solid transparent;transition:.25s}.thumb-media img{height:100%;object-fit:cover;filter:saturate(.72);transition:.55s var(--ease)}.project-thumb:hover .thumb-media img,.project-thumb.active .thumb-media img{filter:saturate(1);transform:scale(1.03)}.project-thumb.active .thumb-media{border-color:#bcbab4}.thumb-caption{display:flex;justify-content:space-between;gap:10px;padding-top:9px}.thumb-caption strong{font-size:17px;font-weight:400}.thumb-caption span{font-family:var(--thin);font-size:9px;letter-spacing:.12em;color:#999b98;text-transform:uppercase}
+
+.filmstrip-section{padding:32px 0 115px}.filmstrip-title{margin-bottom:18px}
+.filmstrip {
+    display: grid;
+
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+
+    gap: 14px;
+
+    width: 100%;
+}
+
+.project-thumb{padding:0;border:0;background:none;color:inherit;text-align:left;min-width:0;flex: 0 0 15%;  min-width: 0; width:100%}
+.thumb-media {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+
+    background: #111;
+
+    border: 1px solid #202020;
+
+    transition:
+        border-color 0.35s ease,
+        transform 0.35s var(--ease);
+}
+
+.thumb-media img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    filter:
+        saturate(0.9)
+        brightness(0.92);
+
+    transition:
+        transform 0.6s var(--ease),
+        filter 0.4s ease;
+}
+
+
+/* IMAGE HOVER */
+
+.project-thumb:hover .thumb-media img,
+.project-thumb.active .thumb-media img {
+    transform: scale(1.035);
+
+    filter:
+        saturate(1)
+        brightness(1);
+}
+
+
+.project-thumb:hover .thumb-media,
+.project-thumb.active .thumb-media {
+    border-color: #565656;
+}
+
+
+/* =========================================
+   PROJECT CAPTION
+   ========================================= */
+
+.thumb-caption {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: flex-start;
+
+    gap: 20px;
+
+    padding-top: 15px;
+}
+
+
+/* PROJECT NAME */
+
+.thumb-caption strong {
+    display: block;
+
+    color: #f1efe9;
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 21px;
+    font-weight: 400;
+
+    line-height: 1.05;
+
+    letter-spacing: 0;
+
+    opacity: 1;
+}
+
+
+/* CATEGORY / YEAR */
+
+.thumb-caption span {
+    display: block;
+
+    color: #777;
+
+    font-family: var(--thin);
+
+    font-size: 9px;
+
+    letter-spacing: 0.14em;
+
+    line-height: 1.4;
+
+    text-align: right;
+    text-transform: uppercase;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   INDIVIDUAL PROJECT
+   ========================================= */
+
+.project-thumb {
+    flex: 0 0 clamp(320px, 27vw, 440px);
+
+    min-width: 0;
+
+    cursor: pointer;
+}
+
+
+/* Give the caption space before next section */
+
+.project-thumb {
+    padding-bottom: 8px;
+}
 /* SHOWREEL */
 .showreel{border-top:1px solid var(--line);padding-bottom:115px}.reel-frame{width:100%;aspect-ratio:16/9;background:#000;border:1px solid var(--line);overflow:hidden}.reel-frame iframe{width:100%;height:100%;border:0}.reel-links{display:flex;justify-content:space-between;align-items:center;margin-top:18px;color:var(--muted)}
 /* ABOUT CONTACT */
@@ -145,18 +283,25 @@ header{position:fixed;z-index:100;inset:0 0 auto;transition:.3s}header.scrolled{
 }
 
 .project-thumb{min-width:72%;scroll-snap-align:start}.breakdown-list{grid-template-columns:repeat(2,1fr)}.breakdown-item{grid-template-columns:1fr}.breakdown-item img{width:100%;height:auto;aspect-ratio:16/9}.lightbox{padding:18px}.lightbox-close{right:14px;top:14px}}
+.section-display-title,
+.section-display-title em {
+    font-family: var(--thin);
+    font-style: normal;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+}
 </style>
 </head>
 <body id="top">
 <header id="header"><nav class="wrap"><a class="brand" href="#top">BCY</a><div class="links" id="links"><a href="#work">Work</a><a href="#showreel">Showreel</a><a href="#about">About</a><a href="#contact">Contact</a></div><span class="availability">Available for selected projects</span><button class="menu" id="menu">Menu</button></nav></header>
 <main>
-<section class="hero"><div class="hero-media"><img src="assets/images/hero.jpg" alt="VFX portfolio hero image" onerror="this.style.display='none'"></div><div class="wrap hero-content"><div class="hero-grid"><div><div class="caps">VFX / Motion Graphics Artist · Istanbul</div><h1>Crafting <em>visual worlds.</em></h1></div><div class="hero-side"><p>Visual effects and motion design for film, television, advertising and large-scale video mapping.</p><a class="cta" href="https://drive.google.com/file/d/1CtOnzSA9nwyqi-DhYAzXfXOCIzpl4jsi/view?usp=drive_link" target="_blank" rel="noopener noreferrer">View Full Showreel</a></div></div><div class="hero-foot"><span>Burak Can Yalçın</span><span>Selected Work / Showreel</span><span>Scroll to explore ↓</span></div></div></section>
-<section id="work" class="wrap"><div class="section-head reveal"><div class="caps">01 / Selected Work</div><div><h2 class="section-title">Process before spectacle.</h2><p class="section-note">Choose a project below. The selected project appears here with its before/after comparison and project-specific breakdown stages.</p></div></div></section>
+<section class="hero"><div class="hero-media"><img src="assets/images/hero.jpg" alt="VFX portfolio hero image" onerror="this.style.display='none'"></div><div class="wrap hero-content"><div class="hero-grid"><div><div class="caps">VFX / Motion Graphics Artist · Istanbul</div><h1 class="section-display-title">Crafting <em>visual worlds.</em></h1></div><div class="hero-side"><p>Visual effects and motion design for film, television, advertising and large-scale video mapping.</p><a class="cta" href="https://drive.google.com/file/d/1CtOnzSA9nwyqi-DhYAzXfXOCIzpl4jsi/view?usp=drive_link" target="_blank" rel="noopener noreferrer">View Full Showreel</a></div></div><div class="hero-foot"><span>Burak Can Yalçın</span><span>Selected Work / Showreel</span><span>Scroll to explore ↓</span></div></div></section>
+<section id="work" class="wrap"><div class="section-head reveal"><div class="caps">01 / Selected Work</div><div><h2 class="section-display-title">Process before spectacle.</h2><p class="section-note">Choose a project below. The selected project appears here with its before/after comparison and project-specific breakdown stages.</p></div></div></section>
 <section class="work-stage"><div class="wrap active-grid"><div class="active-info"><span class="caps" id="activeNumber">01 / 06</span><h2 id="activeTitle">Project 01</h2><p id="activeCategory">VFX · Compositing</p><a class="cta" href="https://drive.google.com/file/d/1CtOnzSA9nwyqi-DhYAzXfXOCIzpl4jsi/view?usp=drive_link" target="_blank" rel="noopener noreferrer">View Full Showreel</a></div><div class="active-compare-wrap"><div class="compare" id="activeCompare"><img id="beforeImg" src="assets/images/project-01/before.jpg" alt="Before"><img id="afterImg" class="after" src="assets/images/project-01/after.jpg" alt="After"><div class="compare-line"></div><div class="compare-handle"></div><span class="compare-label before">Before</span><span class="compare-label after-label">After</span><input id="compareRange" type="range" min="0" max="100" value="50" aria-label="Compare before and after"></div></div><aside class="breakdown-panel"><div class="caps">Breakdown</div><div class="breakdown-list" id="breakdownList"></div></aside></div></section>
 <section class="filmstrip-section"><div class="wrap"><div class="caps filmstrip-title">More Projects</div><div class="filmstrip" id="filmstrip"></div></div></section>
-<section class="showreel" id="showreel"><div class="wrap"><div class="section-head reveal"><div class="caps">02 / Full Showreel</div><div><h2 class="section-title">The work in motion.</h2><p class="section-note">A longer-form look at the selected projects and finished work.</p></div></div><div class="reel-frame reveal"><iframe src="https://drive.google.com/file/d/1CtOnzSA9nwyqi-DhYAzXfXOCIzpl4jsi/preview" allow="autoplay; fullscreen" allowfullscreen title="Burak Can Yalçın showreel"></iframe></div><div class="reel-links"><span>Full showreel</span><a class="cta" href="https://drive.google.com/file/d/1CtOnzSA9nwyqi-DhYAzXfXOCIzpl4jsi/view?usp=drive_link" target="_blank" rel="noopener noreferrer">Open Showreel</a></div></div></section>
-<section class="about" id="about"><div class="wrap about-grid"><div><div class="caps">03 / About</div><h2>Technical precision,<br>cinematic instinct.</h2><p>Motion Graphic & VFX Artist with experience across film, television, advertising and video mapping. A process-led practice built around compositing, motion, CG integration and visual storytelling.</p><a class="cta" href="assets/Burak_Can_Yalcin_CV.pdf" target="_blank" rel="noopener">View CV</a></div><div><div class="timeline"><div class="row"><span class="caps">2024 — Now</span><div><h3>Vestel</h3><p>Motion Graphic & VFX Artist</p></div></div><div class="row"><span class="caps">2023 — 2024</span><div><h3>Infinity FX Studio</h3><p>Motion Graphic & VFX Artist</p></div></div><div class="row"><span class="caps">2021 — 2023</span><div><h3>1000 Volt Post Production</h3><p>Motion Graphic & VFX Artist</p></div></div></div><div class="tools"><span class="tag">After Effects</span><span class="tag">Blender</span><span class="tag">Photoshop</span><span class="tag">Premiere Pro</span><span class="tag">Compositing</span></div></div></div></section>
-<section class="contact" id="contact"><div class="wrap contact-grid"><img class="contact-photo" src="assets/images/contact.jpg" alt="Contact portrait"><div><div class="caps">04 / Contact</div><h2>Let’s create<br>the unseen.</h2><p>For projects, collaborations and selected freelance work, get in touch directly.</p><div class="contact-links"><a class="contact-link" href="mailto:burakcanyalcinfx@gmail.com"><span>Email</span><span>burakcanyalcinfx@gmail.com ↗</span></a><a class="contact-link" href="https://www.linkedin.com/in/burak-can-244497202" target="_blank" rel="noopener"><span>LinkedIn</span><span>Open profile ↗</span></a></div></div></div></section>
+<section class="showreel" id="showreel"><div class="wrap"><div class="section-head reveal"><div class="caps">02 / Full Showreel</div><div><h2 class="section-display-title">The work in motion.</h2><p class="section-note">A longer-form look at the selected projects and finished work.</p></div></div><div class="reel-frame reveal"><iframe src="https://drive.google.com/file/d/1CtOnzSA9nwyqi-DhYAzXfXOCIzpl4jsi/preview" allow="autoplay; fullscreen" allowfullscreen title="Burak Can Yalçın showreel"></iframe></div><div class="reel-links"><span>Full showreel</span><a class="cta" href="https://drive.google.com/file/d/1CtOnzSA9nwyqi-DhYAzXfXOCIzpl4jsi/view?usp=drive_link" target="_blank" rel="noopener noreferrer">Open Showreel</a></div></div></section>
+<section class="about" id="about"><div class="wrap about-grid"><div><div class="caps">03 / About</div><h2 class="section-display-title">Technical precision,<br>cinematic instinct.</h2><p>Motion Graphic & VFX Artist with experience across film, television, advertising and video mapping. A process-led practice built around compositing, motion, CG integration and visual storytelling.</p><a class="cta" href="assets/Burak_Can_Yalcin_CV.pdf" target="_blank" rel="noopener">View CV</a></div><div><div class="timeline"><div class="row"><span class="caps">2024 — Now</span><div><h3>Vestel</h3><p>Motion Graphic & VFX Artist</p></div></div><div class="row"><span class="caps">2023 — 2024</span><div><h3>Infinity FX Studio</h3><p>Motion Graphic & VFX Artist</p></div></div><div class="row"><span class="caps">2021 — 2023</span><div><h3>1000 Volt Post Production</h3><p>Motion Graphic & VFX Artist</p></div></div></div><div class="tools"><span class="tag">After Effects</span><span class="tag">Blender</span><span class="tag">Photoshop</span><span class="tag">Premiere Pro</span><span class="tag">Compositing</span></div></div></div></section>
+<section class="contact" id="contact"><div class="wrap contact-grid"><img class="contact-photo" src="assets/images/contact.jpg" alt="Contact portrait"><div><div class="caps">04 / Contact</div><h2 class="section-display-title">Let’s create<br>the unseen.</h2><p>For projects, collaborations and selected freelance work, get in touch directly.</p><div class="contact-links"><a class="contact-link" href="mailto:burakcanyalcinfx@gmail.com"><span>Email</span><span>burakcanyalcinfx@gmail.com ↗</span></a><a class="contact-link" href="https://www.linkedin.com/in/burak-can-244497202" target="_blank" rel="noopener"><span>LinkedIn</span><span>Open profile ↗</span></a></div></div></div></section>
 </main>
 <footer><div class="wrap footer-bottom"><span>© <span id="year"></span> Burak Can Yalçın</span><span>Motion Graphic & VFX Artist</span><a href="#top">Back to top ↑</a></div></footer>
 <div
@@ -218,7 +363,9 @@ const projects=[
  {key:'project-03',title:'Project 03',category:'Environment · Compositing',stages:['Plate','Cleanup','CG','Lighting','Final']},
  {key:'project-04',title:'Project 04',category:'Motion · CG',stages:['Base','Animation','Lighting','Final']},
  {key:'project-05',title:'Project 05',category:'VFX · Commercial',stages:['Plate','Tracking','Cleanup','Composite','Final']},
- {key:'project-06',title:'Project 06',category:'Motion · VFX',stages:['Source','Design','Integration','Final']}
+ {key:'project-06',title:'Project 06',category:'Motion · VFX',stages:['Source','Design','Integration','Final']},
+ {key:'project-07',title:'Project 07',category:'Motion · VFX',stages:['Plate','Tracking','Cleanup','CG Integration','Final']},
+ {key:'project-08',title:'Project 08',category:'Motion · VFX',stages:['Plate','Tracking','Cleanup','CG Integration','Final']}
 ];
 const path=(p,file)=>`assets/images/${p.key}/${file}`;
 const filmstrip=document.getElementById('filmstrip'),breakdownList=document.getElementById('breakdownList'),beforeImg=document.getElementById('beforeImg'),afterImg=document.getElementById('afterImg'),range=document.getElementById('compareRange'),compare=document.getElementById('activeCompare');
